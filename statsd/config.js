@@ -11,5 +11,7 @@
   backends: ['./backends/graphite'],
   graphite: {
     legacyNamespace: false
-  }
+  },
+
+  dumpMessages: true
 }
