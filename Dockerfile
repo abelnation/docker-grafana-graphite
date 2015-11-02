@@ -79,7 +79,6 @@ ADD     ./collectd/collectd.conf /etc/collectd/collectd.conf
 # Confiure StatsD
 ADD     ./statsd/config.js /src/statsd/config.js
 
-
 # Add the default dashboards
 RUN     mkdir /src/dashboards
 ADD     ./grafana/dashboards/* /src/dashboards/
