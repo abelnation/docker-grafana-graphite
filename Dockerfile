@@ -36,6 +36,9 @@ RUN     git clone https://github.com/graphite-project/graphite-web.git /src/grap
         git checkout 0.9.x                                                                &&\
         python setup.py install
 
+# Install Collectd
+RUN     apt-get -y install collectd collectd-utils
+
 # Install StatsD
 RUN     git clone https://github.com/etsy/statsd.git /src/statsd                                                                        &&\
         cd /src/statsd                                                                                                                  &&\
@@ -53,6 +56,9 @@ RUN     mkdir /src/grafana                                                      
 # ----------------- #
 #   Configuration   #
 # ----------------- #
+
+# Configure collectd
+ADD     ./collectd/collectd.conf.js /etc/collectd/collectd.conf
 
 # Confiure StatsD
 ADD     ./statsd/config.js /src/statsd/config.js
