@@ -57,12 +57,6 @@ RUN     mkdir /src/grafana                                                      
 #   Configuration   #
 # ----------------- #
 
-# Configure collectd
-ADD     ./collectd/collectd.conf /etc/collectd/collectd.conf
-
-# Confiure StatsD
-ADD     ./statsd/config.js /src/statsd/config.js
-
 # Configure Whisper, Carbon and Graphite-Web
 ADD     ./graphite/initial_data.json /opt/graphite/webapp/graphite/initial_data.json
 ADD     ./graphite/local_settings.py /opt/graphite/webapp/graphite/local_settings.py
@@ -78,6 +72,13 @@ RUN     cd /opt/graphite/webapp/graphite && python manage.py syncdb --noinput
 
 # Configure Grafana
 ADD     ./grafana/custom.ini /opt/grafana/conf/custom.ini
+
+# Configure collectd
+ADD     ./collectd/collectd.conf /etc/collectd/collectd.conf
+
+# Confiure StatsD
+ADD     ./statsd/config.js /src/statsd/config.js
+
 
 # Add the default dashboards
 RUN     mkdir /src/dashboards
