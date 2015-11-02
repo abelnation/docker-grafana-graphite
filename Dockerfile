@@ -58,7 +58,7 @@ RUN     mkdir /src/grafana                                                      
 # ----------------- #
 
 # Configure collectd
-ADD     ./collectd/collectd.conf.js /etc/collectd/collectd.conf
+ADD     ./collectd/collectd.conf /etc/collectd/collectd.conf
 
 # Confiure StatsD
 ADD     ./statsd/config.js /src/statsd/config.js
