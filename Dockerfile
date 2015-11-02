@@ -53,6 +53,20 @@ RUN     mkdir /src/grafana                                                      
         rm /src/grafana.tar.gz
 
 
+# ---------------- #
+#   Expose Ports   #
+# ---------------- #
+
+# Grafana
+EXPOSE  80
+
+# StatsD UDP port
+EXPOSE  8125/udp
+
+# StatsD Management port
+EXPOSE  8126
+
+
 # ----------------- #
 #   Configuration   #
 # ----------------- #
@@ -73,9 +87,6 @@ RUN     cd /opt/graphite/webapp/graphite && python manage.py syncdb --noinput
 # Configure Grafana
 ADD     ./grafana/custom.ini /opt/grafana/conf/custom.ini
 
-# Configure collectd
-ADD     ./collectd/collectd.conf /etc/collectd/collectd.conf
-
 # Confiure StatsD
 ADD     ./statsd/config.js /src/statsd/config.js
 
@@ -89,21 +100,8 @@ ADD     ./grafana/dashboard-loader/dashboard-loader.js /src/dashboard-loader/
 ADD     ./nginx/nginx.conf /etc/nginx/nginx.conf
 ADD     ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-
-# ---------------- #
-#   Expose Ports   #
-# ---------------- #
-
-# Grafana
-EXPOSE  80
-
-# StatsD UDP port
-EXPOSE  8125/udp
-
-# StatsD Management port
-EXPOSE  8126
-
-
+# Configure collectd
+ADD     ./collectd/collectd.conf /etc/collectd/collectd.conf
 
 # -------- #
 #   Run!   #
